@@ -1,14 +1,20 @@
 import UIKit
 
-// 1. Variables
+/**
+ * 1. Variables
+ */
 var str = "Hello, playground"
 str = "Goodbye"
 
-// 2. Strings and Integers
+/**
+ * 2. Strings and Integers
+ */
 var age = 40
 var population = 60_000_000
 
-// 3. Mulit-line strings
+/**
+ * 3. Mulit-line strings
+ */
 var str1 = """
 This goes
 over multiple
@@ -23,22 +29,30 @@ over multiple \
 lines
 """
 
-// 4. Doubles and booleans
+/**
+ * 4. Doubles and booleans
+ */
 var pi = 3.141
 var awesome = true
 
-// 5. String interpolation
+/**
+ * 5. String interpolation
+ */
 var score = 85
 var strScore = "Your score was \(score)"
 var results = "The test results are here: \(strScore)"
 
-// 6. Constants
+/**
+ * 6. Constants
+ */
 let taylor = "swift"
 
 // Uncomment the following line to try to change the constant
 // taylor = "launay"
 
-// 7. Type annotations
+/**
+ * 7. Type annotations
+ */
 let album: String = "Reputation"
 let year: Int = 1989
 let height: Double = 1.78

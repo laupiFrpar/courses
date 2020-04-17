@@ -11,6 +11,8 @@ import UIKit
 class DetailViewController: UIViewController {
     @IBOutlet var ImageView: UIImageView!
     var selectedImage: String?
+    var number: Int?
+    var total: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,7 @@ class DetailViewController: UIViewController {
 
         if let imageToLoad = selectedImage {
             title = selectedImage
+            title = "Picture \(number!) of \(total!)"
             ImageView.image = UIImage(named: imageToLoad)
         }
     }

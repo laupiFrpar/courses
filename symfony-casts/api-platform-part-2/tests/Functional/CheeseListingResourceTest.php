@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Entity\CheeseListing;
 use App\Entity\User;
 use App\Test\CustomApiTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
@@ -25,5 +26,39 @@ class CheeseListingResourceTest extends CustomApiTestCase
             'json' => [],
         ]);
         $this->assertResponseStatusCodeSame(400);
+    }
+
+    public function testUpdateCheeseListing()
+    {
+        $client = self::createClient();
+        $user1 = $this->createUser('user1@example.com', 'foo');
+        $this->createUser('user2@example.com', 'foo');
+
+        $cheeseListing = new CheeseListing('Block of cheddar');
+        $cheeseListing
+            ->setOwner($user1)
+            ->setPrice(1000)
+            ->setDescription('mmm')
+        ;
+
+        $em = $this->getEntityManager();
+        $em->persist($cheeseListing);
+        $em->flush();
+
+        $this->logIn($client, 'user2@example.com', 'foo');
+        $client->request('PUT', '/api/cheeses/'.$cheeseListing->getId(), [
+            'json' => [
+                'title' => 'updated',
+            ],
+        ]);
+        $this->assertResponseStatusCodeSame(403);
+
+        $this->logIn($client, 'user1@example.com', 'foo');
+        $client->request('PUT', '/api/cheeses/'.$cheeseListing->getId(), [
+            'json' => [
+                'title' => 'updated',
+            ],
+        ]);
+        $this->assertResponseStatusCodeSame(200);
     }
 }

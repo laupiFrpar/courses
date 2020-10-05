@@ -32,7 +32,7 @@ class CheeseListingResourceTest extends CustomApiTestCase
     {
         $client = self::createClient();
         $user1 = $this->createUser('user1@example.com', 'foo');
-        $this->createUser('user2@example.com', 'foo');
+        $user2 = $this->createUser('user2@example.com', 'foo');
 
         $cheeseListing = new CheeseListing('Block of cheddar');
         $cheeseListing
@@ -49,6 +49,7 @@ class CheeseListingResourceTest extends CustomApiTestCase
         $client->request('PUT', '/api/cheeses/'.$cheeseListing->getId(), [
             'json' => [
                 'title' => 'updated',
+                'owner' => '/api/users/'.$user2->getId(),
             ],
         ]);
         $this->assertResponseStatusCodeSame(403);

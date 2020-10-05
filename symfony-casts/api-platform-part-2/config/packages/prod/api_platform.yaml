@@ -1,0 +1,10 @@
+# At the end of the day, if you're ok keeping the machine-readable docs and the
+# entrypoint stuff, but you really don't want to expose the pretty HTML docs,
+# you could always create an event subscriber on the kernel.request event - now
+# called the RequestEvent in Symfony 4.3 - and, if the URL is /api and the
+# request format is HTML, return a 404.
+# You can see an example here: https://bit.ly/2YmR6Uh
+
+api_platform:
+    enable_docs: false
+    enable_entrypoint: false

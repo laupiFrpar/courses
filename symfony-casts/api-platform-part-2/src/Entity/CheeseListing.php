@@ -47,6 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(RangeFilter::class, properties={"price"})
  * @ApiFilter(PropertyFilter::class)
  * @ORM\Entity(repositoryClass="App\Repository\CheeseListingRepository")
+ * @ORM\EntityListeners({"App\Doctrine\CheeseListingSetOwnerListener"})
  */
 class CheeseListing
 {
@@ -100,7 +101,6 @@ class CheeseListing
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"cheese:read", "cheese:collection:post"})
      * @IsValidOwner()
-     * @Assert\NotBlank()
      */
     private $owner;
 

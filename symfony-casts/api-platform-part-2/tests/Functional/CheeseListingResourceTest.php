@@ -55,6 +55,7 @@ class CheeseListingResourceTest extends CustomApiTestCase
             ->setOwner($user1)
             ->setPrice(1000)
             ->setDescription('mmm')
+            ->setIsPublished(true)
         ;
 
         $em = $this->getEntityManager();
@@ -120,7 +121,7 @@ class CheeseListingResourceTest extends CustomApiTestCase
     public function testGetCheeseListingItem()
     {
         $client = self::createClient();
-        $user = $this->createUser('cheeseplease@example.com', 'foo');
+        $user = $this->createUserAndLogIn($client, 'cheeseplese@example.com', 'foo');
 
         $cheeseListing1 = new CheeseListing('cheese1');
         $cheeseListing1
@@ -136,5 +137,9 @@ class CheeseListingResourceTest extends CustomApiTestCase
 
         $client->request('GET', '/api/cheeses/'.$cheeseListing1->getId());
         $this->assertResponseStatusCodeSame(404);
+
+        $client->request('GET', '/api/users/'.$user->getId());
+        $data = $client->getResponse()->toArray();
+        $this->assertEmpty($data['cheeseListings']);
     }
 }

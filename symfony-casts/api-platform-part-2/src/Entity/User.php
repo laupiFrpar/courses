@@ -196,6 +196,17 @@ class User implements UserInterface
         return $this->cheeseListings;
     }
 
+    /**
+     * @Groups({"user:read"})
+     * @SerializedName("cheeseListings")
+     */
+    public function getPublishedCheeseListings(): Collection
+    {
+        return $this->cheeseListings->filter(function (CheeseListing $cheeseListing) {
+            return $cheeseListing->getIsPublished();
+        });
+    }
+
     public function addCheeseListing(CheeseListing $cheeseListing): self
     {
         if (!$this->cheeseListings->contains($cheeseListing)) {

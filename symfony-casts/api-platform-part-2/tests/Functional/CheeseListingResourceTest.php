@@ -3,7 +3,6 @@
 namespace App\Tests\Functional;
 
 use App\Entity\CheeseListing;
-use App\Entity\User;
 use App\Test\CustomApiTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
 
@@ -116,5 +115,26 @@ class CheeseListingResourceTest extends CustomApiTestCase
 
         $client->request('GET', '/api/cheeses');
         $this->assertJsonContains(['hydra:totalItems' => 2]);
+    }
+
+    public function testGetCheeseListingItem()
+    {
+        $client = self::createClient();
+        $user = $this->createUser('cheeseplease@example.com', 'foo');
+
+        $cheeseListing1 = new CheeseListing('cheese1');
+        $cheeseListing1
+            ->setOwner($user)
+            ->setPrice(1000)
+            ->setDescription('cheese')
+            ->setIsPublished(false)
+        ;
+
+        $em = $this->getEntityManager();
+        $em->persist($cheeseListing1);
+        $em->flush();
+
+        $client->request('GET', '/api/cheeses/'.$cheeseListing1->getId());
+        $this->assertResponseStatusCodeSame(404);
     }
 }

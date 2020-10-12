@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="row">
-          <legend-component />
+          <legend-component title="TODO PUT LEGEND HERE" />
         </div>
       </div>
     </div>

@@ -11,17 +11,16 @@
           class="nav-link"
         >All products</a>
       </li>
-      <li class="nav-item">
+      <li
+        v-for="(category, index) in categories"
+        :key="index"
+        class="nav-item"
+      >
         <a
-          href="#"
+          :href="category.link"
           class="nav-link"
-        >Category A</a>
-      </li>
-      <li class="nav-item">
-        <a
-          href="#"
-          class="nav-link"
-        >Category B</a>
+        >
+          {{ category.name }}</a>
       </li>
     </ul>
   </div>
@@ -30,7 +29,21 @@
 <script>
 export default {
   name: 'Sidebar',
+  data() {
+    return {
+      categories: [
+        {
+          name: 'Dot Matrix Printers',
+          link: '#',
+        },
+        {
+          name: 'Iomega Zip Drives',
+          link: '#',
+        },
 
+      ]
+    }
+  },
 };
 </script>
 

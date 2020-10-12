@@ -1,15 +1,15 @@
 import Vue from 'vue';
-
-const template = '<h1>Hello {{ firstName }}! Is this cooler?</h1>';
+import App from './pages/products';
 
 new Vue({
-  el: '#app',
-  data() {
-    return {
-      firstName: 'Ryan',
-    };
-  },
-  render(h) {
-    return Vue.compile(template).render.call(this, h);
-  },
-});
+  render: (h) => h(App),
+}).$mount('#app');
+
+/**
+ * Vue 3
+ *
+ * import { createApp, compile } from 'vue';
+ * import App from './pages/products';
+ *
+ * createApp(App).mount('#app');
+ */

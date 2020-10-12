@@ -14,8 +14,8 @@
     "browser": true
   },
   "rules": {
-    "vue/html-indent": ["error", 4],
-    "indent": ["error", 4],
+    "vue/html-indent": ["error", 2],
+    "indent": ["error", 2],
     "no-alert": 0,
     "no-unused-vars": "warn",
     "spaced-comment": "off",

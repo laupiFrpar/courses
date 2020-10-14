@@ -8,8 +8,11 @@
       <ul class="nav flex-column mb4">
         <li class="nav-item">
           <a
+            :class="{
+              'nav-link': true,
+              'selected': currentCategoryId === null,
+            }"
             href="/"
-            class="nav-link"
           >All products</a>
         </li>
         <li
@@ -18,8 +21,11 @@
           class="nav-item"
         >
           <a
+            :class="{
+              'nav-link': true,
+              'selected': category['@id'] === currentCategoryId,
+            }"
             :href="`/category/${category.id}`"
-            class="nav-link"
           >
             {{ category.name }}</a>
         </li>
@@ -54,6 +60,11 @@ export default {
       categories: [],
     };
   },
+  computed: {
+    currentCategoryId() {
+      return window.currentCategoryId;
+    },
+  },
   async created() {
     const response = await axios.get('/api/categories');
 
@@ -64,12 +75,17 @@ export default {
 
 <style lang="scss" module>
 @import '~styles/components/light-component.scss';
-.component {
+
+.component :global {
   @include light-component;
 
   ul {
     li a:hover {
       background: $blue-component-link-hover;
+    }
+
+    li a.selected {
+      background: $light-component-border;
     }
   }
 }

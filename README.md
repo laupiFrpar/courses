@@ -12,6 +12,7 @@ All source code from courses
 
 * [100 Days of Swift](https://www.hackingwithswift.com/100)
 * [Universal React example](https://24ways.org/2015/universal-react/)
+* [Python : des fondamentaux à l'utilisation du langage](https://www.fun-mooc.fr/courses/inria/41001S02/session02/)
 
 ## From books
 

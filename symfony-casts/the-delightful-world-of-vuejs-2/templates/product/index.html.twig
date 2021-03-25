@@ -20,6 +20,12 @@
             window.currentCategoryId = null;
         {% endif %}
         window.categories = {{ categories|jsonld }};
+
+        {% if currentProductId is defined %}
+            window.currentProductId = '{{ currentProductId|e('js') }}';
+        {% else %}
+            window.currentProductId = null;
+        {% endif %}
     </script>
 
     {{ encore_entry_script_tags('products') }}

@@ -43,6 +43,7 @@
               />
 
               <input
+                v-model.number="quantity"
                 type="number"
                 class="form-control mx-3"
                 min="1"
@@ -54,6 +55,14 @@
                 @click="addToCart"
               >
                 Add to Cart
+                <i
+                  v-show="addToCartLoading"
+                  class="fas fa-spinner fa-spin"
+                />
+                <i
+                  v-show="addToCartSuccess"
+                  class="fas fa-check"
+                />
               </button>
             </div>
           </div>
@@ -87,6 +96,9 @@ export default {
   data() {
     return {
       cart: null,
+      quantity: 1,
+      addToCartLoading: false,
+      addToCartSuccess: false,
       product: null,
       loading: true,
     };
@@ -113,12 +125,16 @@ export default {
     }
   },
   methods: {
-    addToCart() {
-      addItemToCart(this.cart, {
+    async addToCart() {
+      this.addToCartLoading = true;
+      this.addToCartSuccess = false;
+      await addItemToCart(this.cart, {
         product: this.product['@id'],
         color: null,
-        quantity: 1,
+        quantity: this.quantity,
       });
+      this.addToCartLoading = false;
+      this.addToCartSuccess = true;
     }
   }
 };

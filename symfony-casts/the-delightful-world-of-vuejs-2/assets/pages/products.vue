@@ -11,10 +11,9 @@
             </aside>
 
             <div :class="contentClass">
-                Product: {{ currentProductId }}
-                <catalog
-                    :current-category-id="currentCategoryId"
-                    :categories="categories"
+                <component
+                    :is="currentComponent"
+                    v-bind="currentProps"
                 />
             </div>
         </div>
@@ -22,7 +21,8 @@
 </template>
 
 <script>
-import Catalog from '@/components/catalog';
+import Catalog from '@/components/catalog'
+import ProductShow from '@/components/product-show';
 import Sidebar from '@/components/sidebar';
 import { getCurrentCategoryId, getCurrentProductId } from '@/services/page-context';
 import { fetchCategories } from '@/services/categories-service';
@@ -31,6 +31,7 @@ export default {
     name: 'Products',
     components: {
         Catalog,
+        ProductShow,
         Sidebar,
     },
     data() {
@@ -49,7 +50,18 @@ export default {
         },
         currentProductId() {
             return getCurrentProductId();
-        }
+        },
+        currentComponent() {
+            return this.currentProductId !== null ? ProductShow : Catalog;
+        },
+        currentProps() {
+            return this.currentComponent === ProductShow ? {
+                productId: this.currentProductId,
+            } : {
+                currentCategoryId: this.currentCategoryId,
+                categories: this.categories,
+            };
+        },
     },
     async created() {
         const response = await fetchCategories();

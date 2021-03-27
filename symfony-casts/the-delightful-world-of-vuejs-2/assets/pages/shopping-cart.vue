@@ -16,11 +16,15 @@
 
 <script>
 import TitleComponent from '@/components/title';
+import ShoppingCartMixin from '@/mixins/get-shopping-cart';
 
 export default {
   name: 'ShoppingCart',
   components: {
     TitleComponent,
+  },
+  mixins: {
+    ShoppingCartMixin,
   },
 };
 </script>

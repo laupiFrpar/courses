@@ -77,8 +77,9 @@
 import Loading from '@/components/loading';
 import TitleComponent from '@/components/title';
 import ColorSelector from '@/components/color-selector';
-import { fetchOneProduct } from '@/services/products-service';
 import formatPrice from '@/helpers/format-price';
+import ShoppingCartMixin from '@/mixins/get-shopping-cart';
+import { fetchOneProduct } from '@/services/products-service';
 import { fetchCart, addItemToCart, getCartTotalItems } from '@/services/cart-service';
 
 export default {
@@ -88,6 +89,7 @@ export default {
     TitleComponent,
     ColorSelector,
   },
+  mixins: [ShoppingCartMixin],
   props: {
     productId: {
       type: String,
@@ -115,11 +117,6 @@ export default {
     },
   },
   async created() {
-
-    fetchCart().then((cart) => {
-      this.cart = cart;
-    });
-
     try {
       this.product = (await fetchOneProduct(this.productId)).data;
     } finally {

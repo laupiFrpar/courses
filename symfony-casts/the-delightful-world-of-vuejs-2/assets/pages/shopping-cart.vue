@@ -7,7 +7,18 @@
         <title-component text="Shopping Cart" />
 
         <div class="content p-3">
-          TODO - show the cart
+          <loading v-if="cart === null" />
+          <div v-if="cart !== null">
+            <div
+              v-for="(carItem, index) in cart.items"
+              :key="index"
+            >
+              {{ carItem.product }} ({{ carItem.quantity }})
+            </div>
+            <div v-if="cart.items.length === 0">
+              Your cart is empty! Get to shopping!
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -16,16 +27,16 @@
 
 <script>
 import TitleComponent from '@/components/title';
+import Loading from '@/components/loading';
 import ShoppingCartMixin from '@/mixins/get-shopping-cart';
 
 export default {
   name: 'ShoppingCart',
   components: {
+    Loading,
     TitleComponent,
   },
-  mixins: {
-    ShoppingCartMixin,
-  },
+  mixins: [ShoppingCartMixin],
 };
 </script>
 

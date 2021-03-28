@@ -7,15 +7,15 @@
         <title-component text="Shopping Cart" />
 
         <div class="content p-3">
-          <loading v-if="cart === null" />
-          <div v-if="cart !== null">
+          <loading v-if="completeCart === null" />
+          <div v-if="completeCart !== null">
             <div
-              v-for="(carItem, index) in cart.items"
+              v-for="(carItem, index) in completeCart.items"
               :key="index"
             >
-              {{ carItem.product }} ({{ carItem.quantity }})
+              {{ carItem.product.name }} ({{ carItem.quantity }})
             </div>
-            <div v-if="cart.items.length === 0">
+            <div v-if="completeCart.items.length === 0">
               Your cart is empty! Get to shopping!
             </div>
           </div>
@@ -38,22 +38,36 @@ export default {
     TitleComponent,
   },
   mixins: [ShoppingCartMixin],
-  watch: {
-    async cart() {
-      const productIds = this.cart.items.map((item) => item.product);
-
-      const productsResponse = await fetchProductsById(productIds);
-      const products = productsResponse.data['hydra:member'];
+  data() {
+    return {
+      products: null,
+    };
+  },
+  computed: {
+    completeCart() {
+      if (!this.cart || !this.products) {
+        return null;
+      }
 
       const completeItems = this.cart.items.map((cartItem) => (
         {
-          product: products.find((product) => product['@id'] === cartItem.product),
+          product: this.products.find((product) => product['@id'] === cartItem.product),
           color: cartItem.color,
           quantity: cartItem.quantity,
         }
       ));
 
-      console.log(completeItems);
+      return {
+        items: completeItems,
+      };
+    },
+  },
+  watch: {
+    async cart() {
+      const productIds = this.cart.items.map((item) => item.product);
+
+      const productsResponse = await fetchProductsById(productIds);
+      this.products = productsResponse.data['hydra:member'];
     },
   },
 };

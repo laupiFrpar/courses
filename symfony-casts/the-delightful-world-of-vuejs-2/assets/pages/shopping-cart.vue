@@ -10,11 +10,13 @@
           <loading v-if="completeCart === null" />
           <div v-if="completeCart !== null">
             <div
-              v-for="(carItem, index) in completeCart.items"
+              v-for="(cartItem, index) in completeCart.items"
               :key="index"
             >
-              {{ carItem.product.name }} ({{ carItem.quantity }})
+              {{ cartItem.product.name }} ({{ cartItem.quantity }})
+              {{ cartItem.color ? cartItem.color.hexColor : '' }}
             </div>
+
             <div v-if="completeCart.items.length === 0">
               Your cart is empty! Get to shopping!
             </div>
@@ -29,6 +31,7 @@
 import TitleComponent from '@/components/title';
 import Loading from '@/components/loading';
 import ShoppingCartMixin from '@/mixins/get-shopping-cart';
+import { fetchColors } from '@/services/colors-service';
 import { fetchProductsById } from '@/services/products-service';
 
 export default {
@@ -41,18 +44,19 @@ export default {
   data() {
     return {
       products: null,
+      colors: null,
     };
   },
   computed: {
     completeCart() {
-      if (!this.cart || !this.products) {
+      if (!this.cart || !this.products || !this.colors) {
         return null;
       }
 
       const completeItems = this.cart.items.map((cartItem) => (
         {
           product: this.products.find((product) => product['@id'] === cartItem.product),
-          color: cartItem.color,
+          color: this.colors.find((color) => color['@id'] === cartItem.color),
           quantity: cartItem.quantity,
         }
       ));
@@ -64,6 +68,14 @@ export default {
   },
   watch: {
     async cart() {
+      this.loadProducts();
+    },
+  },
+  async created() {
+    this.colors = (await fetchColors()).data['hydra:member'];
+  },
+  methods: {
+    async loadProducts() {
       const productIds = this.cart.items.map((item) => item.product);
 
       const productsResponse = await fetchProductsById(productIds);

@@ -46,13 +46,17 @@ export default {
         return null;
       }
 
-      const completeItems = this.cart.items.map((cartItem) => (
-        {
-          product: this.products.find((product) => product['@id'] === cartItem.product),
-          color: this.colors.find((color) => color['@id'] === cartItem.color),
+      const completeItems = this.cart.items.map((cartItem) => {
+        const product = this.products.find((productItem) => productItem['@id'] === cartItem.product);
+        const color = this.colors.find((colorItem) => colorItem['@id'] === cartItem.color);
+
+        return {
+          id: `${cartItem.product}_${cartItem.color ? cartItem.color : 'none'}`,
+          product,
+          color,
           quantity: cartItem.quantity,
-        }
-      ));
+        };
+      });
 
       return {
         items: completeItems,

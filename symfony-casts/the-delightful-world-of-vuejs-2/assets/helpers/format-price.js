@@ -5,6 +5,6 @@
  * @returns {string}
  */
 export default (price) => (
-    (price / 100)
-        .toLocaleString('en-US', { minimumFractionDigits: 2 })
+  (price / 100)
+    .toLocaleString('en-US', { minimumFractionDigits: 2 })
 );

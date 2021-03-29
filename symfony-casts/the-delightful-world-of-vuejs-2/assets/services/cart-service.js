@@ -18,11 +18,11 @@ import axios from 'axios';
  * @return {string|null}
  */
 function getCartIri() {
-    return window.cartIri;
+  return window.cartIri;
 }
 
 function setCartIri(cartIri) {
-    window.cartIri = cartIri;
+  window.cartIri = cartIri;
 }
 
 /**
@@ -33,9 +33,9 @@ function setCartIri(cartIri) {
  * @param {string} colorId
  */
 function findItemIndex(cart, productId, colorId) {
-    return cart.items.findIndex((cartItem) => (
-        cartItem.product === productId && cartItem.color === colorId
-    ));
+  return cart.items.findIndex((cartItem) => (
+    cartItem.product === productId && cartItem.color === colorId
+  ));
 }
 
 /**
@@ -44,19 +44,19 @@ function findItemIndex(cart, productId, colorId) {
  * @return {Promise<CartCollection>}
  */
 export async function fetchCart() {
-    const cartIri = getCartIri();
+  const cartIri = getCartIri();
 
-    if (cartIri === null) {
-        return new Promise((resolve) => {
-            resolve({
-                items: [],
-            });
-        });
-    }
+  if (cartIri === null) {
+    return new Promise((resolve) => {
+      resolve({
+        items: [],
+      });
+    });
+  }
 
-    const response = await axios.get(cartIri);
+  const response = await axios.get(cartIri);
 
-    return { items: response.data.items };
+  return { items: response.data.items };
 }
 
 /**
@@ -67,24 +67,24 @@ export async function fetchCart() {
  * @return {Promise}
  */
 export async function addItemToCart(cart, item) {
-    const cartIri = getCartIri();
-    const itemIndex = findItemIndex(cart, item.product, item.color);
+  const cartIri = getCartIri();
+  const itemIndex = findItemIndex(cart, item.product, item.color);
 
-    if (itemIndex !== -1) {
-        cart.items[itemIndex].quantity += item.quantity;
-    } else {
-        cart.items.push(item);
-    }
+  if (itemIndex !== -1) {
+    cart.items[itemIndex].quantity += item.quantity;
+  } else {
+    cart.items.push(item);
+  }
 
-    let response = null;
-    if (cartIri !== null) {
-        response = await axios.put(cartIri, cart);
-    } else {
-        response = await axios.post('/api/carts', cart);
-        setCartIri(response.data['@id']);
-    }
+  let response = null;
+  if (cartIri !== null) {
+    response = await axios.put(cartIri, cart);
+  } else {
+    response = await axios.post('/api/carts', cart);
+    setCartIri(response.data['@id']);
+  }
 
-    return { items: response.data.items };
+  return { items: response.data.items };
 }
 
 /**
@@ -96,13 +96,13 @@ export async function addItemToCart(cart, item) {
  * @return {Promise}
  */
 export async function removeItemFromCart(cart, productId, colorId) {
-    cart.items = cart.items.filter(
-        (item) => (!(item.product === productId && item.color === colorId)),
-    );
+  cart.items = cart.items.filter(
+    (item) => (!(item.product === productId && item.color === colorId)),
+  );
 
-    const response = await axios.put(getCartIri(), cart);
+  const response = await axios.put(getCartIri(), cart);
 
-    return { items: response.data.items };
+  return { items: response.data.items };
 }
 
 /**
@@ -115,17 +115,17 @@ export async function removeItemFromCart(cart, productId, colorId) {
  * @return {Promise}
  */
 export async function updateCartItemQuantity(cart, productId, colorId, quantity) {
-    const cartItemIndex = findItemIndex(cart, productId, colorId);
+  const cartItemIndex = findItemIndex(cart, productId, colorId);
 
-    if (cartItemIndex === -1) {
-        throw new Error(`Invalid product+color combination: ${productId}, ${colorId}`);
-    }
+  if (cartItemIndex === -1) {
+    throw new Error(`Invalid product+color combination: ${productId}, ${colorId}`);
+  }
 
-    cart.items[cartItemIndex].quantity = quantity;
+  cart.items[cartItemIndex].quantity = quantity;
 
-    const response = await axios.put(getCartIri(), cart);
+  const response = await axios.put(getCartIri(), cart);
 
-    return { items: response.data.items };
+  return { items: response.data.items };
 }
 
 /**
@@ -134,7 +134,7 @@ export async function updateCartItemQuantity(cart, productId, colorId, quantity)
  * @return {Promise}
  */
 export function clearCart() {
-    return axios.delete(getCartIri());
+  return axios.delete(getCartIri());
 }
 
 /**
@@ -144,5 +144,5 @@ export function clearCart() {
  * @return {number}
  */
 export function getCartTotalItems(cart) {
-    return cart.items.reduce((acc, item) => (acc + item.quantity), 0);
+  return cart.items.reduce((acc, item) => (acc + item.quantity), 0);
 }

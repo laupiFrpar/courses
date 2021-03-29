@@ -3,6 +3,7 @@ import {
   addItemToCart,
   getCartTotalItems,
   updateCartItemQuantity,
+  removeItemFromCart,
 } from '@/services/cart-service';
 
 export default {
@@ -40,6 +41,10 @@ export default {
     updateCartHeaderTotal() {
       document.getElementById('js-shopping-cart-items')
         .innerHTML = getCartTotalItems(this.cart).toString();
+    },
+    async removeProductFromCart(productId, colorId) {
+      await removeItemFromCart(this.cart, productId, colorId);
+      this.updateCartHeaderTotal();
     },
   },
 };

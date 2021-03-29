@@ -12,6 +12,10 @@
             v-if="completeCart"
             :items="completeCart.items"
             @updateQuantity="updateQuantity"
+            @removeFromCart="removeProductFromCart(
+              $event.productId,
+              $event.colorId,
+            )"
           />
         </div>
       </div>

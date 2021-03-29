@@ -1,7 +1,12 @@
 <template>
   <div :class="[$style.component, 'container-fluid']">
     <div class="row">
-      <aside class="col-xs-12 col-lg-3" />
+      <aside class="col-xs-12 col-lg-3">
+        <cart-sidebar
+          v-if="featuredProduct"
+          :featured-product="featuredProduct"
+        />
+      </aside>
 
       <div class="col-xs-12 col-lg-9">
         <title-component text="Shopping Cart" />
@@ -25,10 +30,11 @@
 
 <script>
 import { fetchColors } from '@/services/colors-service';
-import { fetchProductsById } from '@/services/products-service';
+import { fetchFeaturedProducts, fetchProductsById } from '@/services/products-service';
 import ShoppingCartMixin from '@/mixins/get-shopping-cart';
 import TitleComponent from '@/components/title';
 import ShoppingCartList from '@/components/shopping-cart';
+import CartSidebar from '@/components/shopping-cart/cart-sidebar';
 import Loading from '@/components/loading';
 
 export default {
@@ -37,12 +43,14 @@ export default {
     Loading,
     ShoppingCartList,
     TitleComponent,
+    CartSidebar,
   },
   mixins: [ShoppingCartMixin],
   data() {
     return {
       products: null,
       colors: null,
+      featuredProduct: null,
     };
   },
   computed: {
@@ -74,6 +82,7 @@ export default {
     },
   },
   async created() {
+    this.loadFeaturedProduct();
     this.colors = (await fetchColors()).data['hydra:member'];
   },
   methods: {
@@ -85,6 +94,15 @@ export default {
     },
     updateQuantity({ productId, colorId, quantity }) {
       this.updateProductQuantity(productId, colorId, quantity);
+    },
+    async loadFeaturedProduct() {
+      const featuredProducts = (await fetchFeaturedProducts()).data['hydra:member'];
+
+      if (featuredProducts.length === 0) {
+        return;
+      }
+
+      [this.featuredProduct] = featuredProducts;
     },
   },
 };

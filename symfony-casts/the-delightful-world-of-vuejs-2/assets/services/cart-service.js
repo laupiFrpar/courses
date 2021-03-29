@@ -116,7 +116,6 @@ export async function removeItemFromCart(cart, productId, colorId) {
  */
 export async function updateCartItemQuantity(cart, productId, colorId, quantity) {
   const cartItemIndex = findItemIndex(cart, productId, colorId);
-
   if (cartItemIndex === -1) {
     throw new Error(`Invalid product+color combination: ${productId}, ${colorId}`);
   }

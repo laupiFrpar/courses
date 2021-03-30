@@ -80,12 +80,13 @@ export default {
       });
 
       return {
-        items: completeItems,
+        // filter out missing products: they may still be loading
+        items: completeItems.filter((item) => item.product),
       };
     },
   },
   watch: {
-    async cart() {
+    'cart.items.length': function watchCartItemsLength() {
       this.loadProducts();
     },
   },

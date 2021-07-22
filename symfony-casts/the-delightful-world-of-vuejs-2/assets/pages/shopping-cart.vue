@@ -47,6 +47,13 @@
             </button>
           </div>
         </div>
+
+        <div
+          v-show="currentState === 'cart'"
+          class="transition-testing"
+        >
+          Testing transitions!
+        </div>
       </div>
     </div>
   </div>
@@ -137,6 +144,7 @@ export default {
     updateQuantity({ productId, colorId, quantity }) {
       this.updateProductQuantity(productId, colorId, quantity);
     },
+
     async loadFeaturedProduct() {
       const featuredProducts = (await fetchFeaturedProducts()).data['hydra:member'];
 
@@ -156,6 +164,13 @@ export default {
 .component :global {
   .content {
     @include light-component;
+  }
+
+  .transition-testing {
+    transition: opacity 3s;
+  }
+  .transition-testing.hidden {
+    opacity: 0;
   }
 }
 </style>

@@ -17,12 +17,13 @@
       </aside>
 
       <div class="col-xs-12 col-lg-9">
-        <title-component text="Shopping Cart" />
+        <title-component :text="pageTitle" />
 
         <div class="content p-3">
           <loading v-if="completeCart === null" />
+
           <shopping-cart-list
-            v-if="completeCart"
+            v-if="completeCart && currentState === 'cart'"
             :items="completeCart.items"
             @updateQuantity="updateQuantity"
             @removeFromCart="removeProductFromCart(
@@ -30,6 +31,21 @@
               $event.colorId,
             )"
           />
+
+          <checkout-form
+            v-if="completeCart && currentState === 'checkout'"
+          />
+
+          <div
+            v-if="completeCart && completeCart.items.length > 0"
+          >
+            <button
+              class="btn btn-primary"
+              @click="switchState"
+            >
+              {{  buttonText }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -44,10 +60,12 @@ import TitleComponent from '@/components/title';
 import ShoppingCartList from '@/components/shopping-cart';
 import CartSidebar from '@/components/shopping-cart/cart-sidebar';
 import Loading from '@/components/loading';
+import CheckoutForm from '@/components/checkout';
 
 export default {
   name: 'ShoppingCart',
   components: {
+    CheckoutForm,
     Loading,
     ShoppingCartList,
     TitleComponent,
@@ -56,6 +74,7 @@ export default {
   mixins: [ShoppingCartMixin],
   data() {
     return {
+      currentState: 'cart',
       products: null,
       colors: null,
       featuredProduct: null,
@@ -84,6 +103,17 @@ export default {
         items: completeItems.filter((item) => item.product),
       };
     },
+
+    pageTitle() {
+      return this.currentState === 'cart'
+        ? 'Shopping Cart'
+        : 'Checkout';
+    },
+    buttonText() {
+      return this.currentState === 'cart'
+        ? 'Check Out!'
+        : '<< Back';
+    }
   },
   watch: {
     'cart.items.length': function watchCartItemsLength() {
@@ -95,6 +125,9 @@ export default {
     this.colors = (await fetchColors()).data['hydra:member'];
   },
   methods: {
+    switchState() {
+      this.currentState = this.currentState === 'cart' ? 'checkout' : 'cart';
+    },
     async loadProducts() {
       const productIds = this.cart.items.map((item) => item.product);
 

@@ -47,13 +47,13 @@
             </button>
           </div>
         </div>
-
-        <div
-          v-show="currentState === 'cart'"
-          class="transition-testing"
-        >
-          Testing transitions!
-        </div>
+        <transition>
+          <div
+            v-show="currentState === 'cart'"
+          >
+            Testing transitions!
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -166,10 +166,10 @@ export default {
     @include light-component;
   }
 
-  .transition-testing {
+  .v-enter-active, .v-leave-active {
     transition: opacity 3s;
   }
-  .transition-testing.hidden {
+  .v-enter, .v-leave-to {
     opacity: 0;
   }
 }

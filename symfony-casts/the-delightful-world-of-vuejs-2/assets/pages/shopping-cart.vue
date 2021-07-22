@@ -21,20 +21,24 @@
 
         <div class="content p-3">
           <loading v-if="completeCart === null" />
+          <transition
+            name="fade"
+            mode="out-in"
+          >
+            <shopping-cart-list
+              v-if="completeCart && currentState === 'cart'"
+              :items="completeCart.items"
+              @updateQuantity="updateQuantity"
+              @removeFromCart="removeProductFromCart(
+                $event.productId,
+                $event.colorId,
+              )"
+            />
 
-          <shopping-cart-list
-            v-if="completeCart && currentState === 'cart'"
-            :items="completeCart.items"
-            @updateQuantity="updateQuantity"
-            @removeFromCart="removeProductFromCart(
-              $event.productId,
-              $event.colorId,
-            )"
-          />
-
-          <checkout-form
-            v-if="completeCart && currentState === 'checkout'"
-          />
+            <checkout-form
+              v-if="completeCart && currentState === 'checkout'"
+            />
+          </transition>
 
           <div
             v-if="completeCart && completeCart.items.length > 0"
@@ -47,13 +51,6 @@
             </button>
           </div>
         </div>
-        <transition>
-          <div
-            v-show="currentState === 'cart'"
-          >
-            Testing transitions!
-          </div>
-        </transition>
       </div>
     </div>
   </div>
@@ -166,10 +163,10 @@ export default {
     @include light-component;
   }
 
-  .v-enter-active, .v-leave-active {
-    transition: opacity 3s;
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 2s;
   }
-  .v-enter, .v-leave-to {
+  .fade-enter, .fade-leave-to {
     opacity: 0;
   }
 }

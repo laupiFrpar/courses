@@ -17,7 +17,15 @@
       </aside>
 
       <div class="col-xs-12 col-lg-9">
-        <title-component :text="pageTitle" />
+        <transition
+          name="fade"
+          mode="out-in"
+        >
+          <title-component
+            :key="currentState"
+            :text="pageTitle"
+          />
+        </transition>
 
         <div class="content p-3">
           <loading v-if="completeCart === null" />

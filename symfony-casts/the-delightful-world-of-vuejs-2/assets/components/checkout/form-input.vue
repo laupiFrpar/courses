@@ -4,13 +4,13 @@
       :for="id"
       class="col-form-label"
     >
-        Name:
+        {{ label }}
     </label>
     <input
       :id="id"
       :name="id"
       :value="value"
-      type="text"
+      :type="type"
       :class="{
         'is-invalid': !isValid,
         'form-control': true,
@@ -45,6 +45,10 @@ export default ({
     value: {
       type: String,
       default: '',
+    },
+    type: {
+      type: String,
+      default: 'text',
     },
   },
   methods: {

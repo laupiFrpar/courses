@@ -1,0 +1,55 @@
+<template>
+  <div class="form-group">
+    <label
+      :for="id"
+      class="col-form-label"
+    >
+        Name:
+    </label>
+    <input
+      :id="id"
+      :name="id"
+      :value="value"
+      type="text"
+      :class="{
+        'is-invalid': !isFieldValid('customerName'),
+        'form-control': true,
+      }"
+    >
+    <span
+      v-show="!isValid"
+      class="invalid-feedback"
+    >
+      {{ errorMessage }}
+    </span>
+  </div>
+</template>
+
+<script>
+export default ({
+  name: 'FormInput',
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+    errorMessage: {
+      type: String,
+      default: '',
+    },
+    value: {
+      type: String,
+      default: '',
+    },
+  },
+  methods: {
+    isValid() {
+      return !this.errorMessage;
+    },
+  },
+})
+</script>

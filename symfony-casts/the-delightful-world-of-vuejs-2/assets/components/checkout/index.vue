@@ -2,37 +2,25 @@
   <div class="row-3">
     <div class="col-12">
       <form action="">
-        <div class="form-group">
-          <label
-            for="customerName"
-            class="col-form-label"
-          >
-            Name:
-          </label>
-          <input
-            id="customerName"
-            v-model.trim="form.customerName"
-            type="text"
-            :class="{
-              'is-invalid': !isFieldValid('customerName'),
-              'form-control': true,
-            }"
-          />
-          <span
-            v-show="!isFieldValid('customerName')"
-            class="invalid-feedback"
-          >
-            {{ validationErrors.customerName }}
-          </span>
-        </div>
+        <form-input
+          id="customerName"
+          :value="form.customerName"
+          label="Name:"
+          :error-message="validationErrors.customerName"
+        />
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import FormInput from '@/components/checkout/form-input';
+
 export default ({
   name: 'CheckoutForm',
+  components: {
+    FormInput,
+  },
   data() {
     return {
       form: {

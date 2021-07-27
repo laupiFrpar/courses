@@ -12,9 +12,10 @@
       :value="value"
       type="text"
       :class="{
-        'is-invalid': !isFieldValid('customerName'),
+        'is-invalid': !isValid,
         'form-control': true,
       }"
+      @input="$emit('input', $event.target.value)"
     >
     <span
       v-show="!isValid"

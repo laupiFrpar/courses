@@ -70,6 +70,7 @@
 import FormInput from '@/components/checkout/form-input';
 import Loading from '@/components/loading';
 import { createOrder } from '@/services/checkout-service';
+import { clearCart } from '@/services/cart-service';
 
 export default {
   name: 'CheckoutForm',
@@ -112,20 +113,26 @@ export default {
     async onSubmit() {
       this.loading = true;
       this.serverError = false;
+      this.validationErrors = {};
 
       try {
         const response = await createOrder({
           ...this.form,
           purchaseItems: this.cart.items,
         });
-        console.log(response.data);
+
+        await clearCart();
+
+        window.location = `/confirmation/${response.data.id}`;
       } catch (error) {
         const { response } = error;
 
         if (response.status !== 400) {
           this.serverError = true;
         } else {
-          console.error(response.data);
+          response.data.violations.forEach((violation) => {
+            this.validationErrors[violation.propertyPath] = violation.message;
+          });
         }
       } finally {
         this.loading = false;

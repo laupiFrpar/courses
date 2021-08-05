@@ -51,7 +51,7 @@ export default ({
       default: 'text',
     },
   },
-  methods: {
+  computed: {
     isValid() {
       return !this.errorMessage;
     },

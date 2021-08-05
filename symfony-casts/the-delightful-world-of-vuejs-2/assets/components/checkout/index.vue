@@ -14,6 +14,7 @@
             v-model="form.customerName"
             class="col"
             v-bind="getFieldProps('customerName', 'Name:')"
+            @blur="validateFields"
           />
 
           <form-input
@@ -21,12 +22,14 @@
             class="col"
             type="email"
             v-bind="getFieldProps('customerEmail', 'Email:')"
+            @blur="validateFields"
           />
         </div>
 
         <form-input
           v-model="form.customerAddress"
           v-bind="getFieldProps('customerAddress', 'Address:')"
+          @blur="validateFields"
         />
 
         <div class="form-row">
@@ -34,12 +37,14 @@
             v-model="form.customerZip"
             class="col"
             v-bind="getFieldProps('customerZip', 'Zip Code:')"
+            @blur="validateFields"
           />
 
           <form-input
             v-model="form.customerCity"
             class="col"
             v-bind="getFieldProps('customerCity', 'City:')"
+            @blur="validateFields"
           />
 
           <form-input
@@ -47,6 +52,7 @@
             class="col"
             type="tel"
             v-bind="getFieldProps('customerPhone', 'Phone Number:')"
+            @blur="validateFields"
           />
         </div>
         <div class="form-row justify-content-end align-items-center">
@@ -137,7 +143,24 @@ export default {
       } finally {
         this.loading = false;
       }
-    }
+    },
+    validateFields(event) {
+      const validationMessages = {
+        customerName: 'Please, enter your full name!',
+        customerEmail: 'Please, enter your email address!',
+        customerAddress: 'Please, enter your street address!',
+        customerZip: 'Please, enter your ZIP code!',
+        customerCity: 'Please, enter your city!',
+        customerPhone: 'Please, provide a phone number!',
+      };
+      const validationField = event.target.id;
+
+      if (!this.form[validationField]) {
+        this.validationErrors[validationField] = validationMessages[validationField];
+      } else {
+        delete this.validationErrors[validationField];
+      }
+    },
   },
 };
 </script>

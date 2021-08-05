@@ -1,7 +1,7 @@
 <template>
   <div class="row-3">
     <div class="col-12">
-      <form action="">
+      <form @submit.prevent="onSubmit">
         <div class="form-row">
           <form-input
             v-model="form.customerName"
@@ -42,6 +42,17 @@
             v-bind="getFieldProps('customerPhone', 'Phone Number:')"
           />
         </div>
+        <div class="form-row justify-content-end align-items-center">
+          <loading v-show="loading" />
+          <div class="col-auto">
+            <button
+              type="submit"
+              class="btn btn-info btn-lg"
+            >
+              Order!
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -49,11 +60,20 @@
 
 <script>
 import FormInput from '@/components/checkout/form-input';
+import Loading from '@/components/loading';
+import { createOrder } from '@/services/checkout-service';
 
 export default {
   name: 'CheckoutForm',
   components: {
     FormInput,
+    Loading,
+  },
+  props: {
+    cart: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -66,6 +86,7 @@ export default {
         customerPhone: '',
       },
       validationErrors: {},
+      loading: false,
     };
   },
   methods: {
@@ -79,6 +100,21 @@ export default {
         errorMessage: this.validationErrors[id],
       }
     },
+    async onSubmit() {
+      this.loading = true;
+
+      try {
+        const response = createOrder({
+          ...this.form,
+          purchaseItems: this.cart.items,
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.error(error.response);
+      } finally {
+        this.loading = false;
+      }
+    }
   },
 };
 </script>

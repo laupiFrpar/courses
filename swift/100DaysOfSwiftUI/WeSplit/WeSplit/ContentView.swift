@@ -84,6 +84,8 @@ struct ContentView: View {
     // https://www.hackingwithswift.com/books/ios-swiftui/adding-a-segmented-control-for-tip-percentages
     // Calculating the total per person
     // https://www.hackingwithswift.com/books/ios-swiftui/calculating-the-total-per-person
+    // WeSplit: Wrap up
+    // https://www.hackingwithswift.com/books/ios-swiftui/wesplit-wrap-up
     @State private var checkAmount = 0.0
     @State private var numberOfPeople = 0
     @State private var tipPercentage = 20
@@ -91,6 +93,7 @@ struct ContentView: View {
     @FocusState private var amountIsFocused: Bool
     
     let tipPercentages = [10, 15, 20, 25, 0]
+    let localCurrency: FloatingPointFormatStyle<Double>.Currency = .currency(code: Locale.current.currency?.identifier ?? "USD")
     
     var totalPerPerson: Double {
         let peopleCount = Double(numberOfPeople + 2)
@@ -103,13 +106,17 @@ struct ContentView: View {
         return amountPerPerson
     }
     
+    var totalAmount: Double {
+        return checkAmount + (checkAmount / 100 * Double(tipPercentage))
+    }
+    
     var body: some View {
         NavigationView {
             Form {
                 Section {
                     TextField("Amount",
                               value: $checkAmount,
-                              format: .currency(code: Locale.current.currency?.identifier ?? "USD")
+                              format: localCurrency
                     )
                     .keyboardType(.decimalPad)
                     .focused($amountIsFocused)
@@ -121,18 +128,31 @@ struct ContentView: View {
                     }
                 }
                 Section {
+//                    Picker("Tip percentage", selection: $tipPercentage) {
+//                        ForEach(tipPercentages, id: \.self) {
+//                            Text($0, format: .percent)
+//                        }
+//                    }
+//                    .pickerStyle(.segmented)
                     Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(tipPercentages, id: \.self) {
+                        ForEach(0..<101) {
                             Text($0, format: .percent)
                         }
                     }
-                    .pickerStyle(.segmented)
                 } header: {
                     Text("How much tip do you want to leave?")
                 }
                 
                 Section {
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalAmount, format: localCurrency)
+                } header: {
+                    Text("Total amount")
+                }
+                
+                Section {
+                    Text(totalPerPerson, format: localCurrency)
+                } header: {
+                    Text("Amount per person")
                 }
             }
             .navigationTitle("WeSplit")

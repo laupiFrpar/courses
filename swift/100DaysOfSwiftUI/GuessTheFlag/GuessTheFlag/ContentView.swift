@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+// Challenge Project 3
+// https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
+struct FlagImage: View {
+    var country: String
+    
+    var body: some View {
+        Image(country)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
+    }
+}
+// End Challenge Project 3
+
 struct ContentView: View {
     // Using stacks to arrange views
     // https://www.hackingwithswift.com/books/ios-swiftui/using-stacks-to-arrange-views
@@ -251,10 +265,14 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+//                            Image(countries[number])
+//                                .renderingMode(.original)
+//                                .clipShape(Capsule())
+//                                .shadow(radius: 5)
+                            // Challenge Project 3
+                            // https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
+                            FlagImage(country: countries[number])
+                            // End Challenge Project 3
                         }
                     }
                 }

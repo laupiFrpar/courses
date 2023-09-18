@@ -90,6 +90,11 @@ struct ContentView: View {
     @State private var numberOfPeople = 0
     @State private var tipPercentage = 20
     
+    // Challenge Project 3
+    // https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
+    @State private var useRedText = false
+    // End Challenge Project 3
+    
     @FocusState private var amountIsFocused: Bool
     
     let tipPercentages = [10, 15, 20, 25, 0]
@@ -145,6 +150,10 @@ struct ContentView: View {
                 
                 Section {
                     Text(totalAmount, format: localCurrency)
+                        // Challenge Project 3
+                        // https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
+                        .foregroundColor(useRedText ? .red : .black)
+                        // End Challenge Project 3
                 } header: {
                     Text("Total amount")
                 }
@@ -165,6 +174,16 @@ struct ContentView: View {
                     }
                 }
             }
+            // Challenge Project 3
+            // https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
+            .onChange(of: tipPercentage) { tip in
+                if tip == 0 {
+                    useRedText = true
+                } else {
+                    useRedText = false
+                }
+            }
+            // End Challenge Project 3
         }
     }
     

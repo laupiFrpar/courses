@@ -199,10 +199,15 @@ struct ContentView: View {
     // https://www.hackingwithswift.com/books/ios-swiftui/styling-our-flags
     // Upgrading our design
     // https://www.hackingwithswift.com/books/ios-swiftui/upgrading-our-design
+    let maxQuestions = 8
+    
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    @State private var currentScore = 0
+    @State private var currentQuestion = 0
+    @State private var showingLastQuestion = false
     
     var body: some View {
         ZStack {
@@ -226,7 +231,7 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Score: ???")
+                Text("Score: \(currentScore)")
                     .foregroundColor(.white)
                     .font(.title.bold())
                 
@@ -263,23 +268,44 @@ struct ContentView: View {
         .alert(scoreTitle, isPresented: $showingScore) {
             Button("Continue", action: askQuestion)
         } message: {
-            Text("Your score is ??")
+            Text("Your score is \(currentScore)")
+        }
+        .alert("Last question", isPresented: $showingLastQuestion) {
+            Button("Continue", action: resetQuestion)
+        } message: {
+            Text("Your score is \(currentScore)")
         }
     }
     
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
+            currentScore += 1
         } else {
-            scoreTitle = "Wrong"
+            scoreTitle = "Wrong! That's the flag of \(countries[number])"
+            currentScore -= 1
         }
         
         showingScore = true
     }
     
     func askQuestion() {
+        currentQuestion += 1
+        
+        if currentQuestion == 8 {
+            showingLastQuestion = true
+        } else {
+            countries.shuffle()
+            correctAnswer = Int.random(in: 0...2)
+        }
+    }
+    
+    func resetQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        currentQuestion = 1
+        currentScore = 0
+        showingLastQuestion = false
     }
 }
 

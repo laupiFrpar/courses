@@ -269,7 +269,7 @@ struct ContentView: View {
 //                                .renderingMode(.original)
 //                                .clipShape(Capsule())
 //                                .shadow(radius: 5)
-                            // Challenge Project 3
+                            // Challeng`e Project 3
                             // https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
                             FlagImage(country: countries[number])
                             // End Challenge Project 3

@@ -156,6 +156,9 @@ struct ContentView: View {
             } message: {
                 Text(errorMessage)
             }
+            .toolbar {
+                Button("New game", action: startGame)
+            }
         }
     }
     
@@ -164,7 +167,10 @@ struct ContentView: View {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         
         // exit if the remaining string is empty
-        guard answer.count > 0 else { return }
+        guard answer.count >= 3 else {
+            wordError(title: "Word too short", message: "You must set a word with 3 or more letters")
+            return
+        }
         
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Be more original")

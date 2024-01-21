@@ -5,10 +5,13 @@
 //  Created by Pierre-Louis Launay on 21/01/2024.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var users = [User]()
+    @Environment(\.modelContext) var modelContext
+    
+    @Query(sort: \User.name) private var users: [User]
     
     var body: some View {
         NavigationStack {
@@ -25,7 +28,7 @@ struct ContentView: View {
             }
             .navigationTitle("FriendFace")
             .navigationDestination(for: User.self) { user in
-                Text(user.name)
+                UserView(user: user)
             }
             .task {
                 await fetchUsers()
@@ -42,7 +45,15 @@ struct ContentView: View {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            users = try decoder.decode([User].self, from: data)
+            let downloadUsers = try decoder.decode([User].self, from: data)
+            
+            let insertContext = ModelContext(modelContext.container)
+            
+            for user in downloadUsers {
+                insertContext.insert(user)
+            }
+            
+            try insertContext.save()
         } catch {
             print("Download failed")
         }

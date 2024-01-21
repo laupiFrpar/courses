@@ -13,5 +13,6 @@ struct Project7App: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: ExpenseItem.self)
     }
 }

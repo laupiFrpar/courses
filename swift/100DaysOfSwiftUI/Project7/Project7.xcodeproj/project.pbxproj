@@ -13,7 +13,7 @@
 		E4DBAA762B078F9C0033E03F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4DBAA752B078F9C0033E03F /* Preview Assets.xcassets */; };
 		E4DBAA7D2B07931F0033E03F /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DBAA7C2B07931F0033E03F /* AddView.swift */; };
 		E4DBAA7F2B0D21730033E03F /* View-ExpenseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DBAA7E2B0D21730033E03F /* View-ExpenseStyle.swift */; };
-		E4DBAA812B0D24300033E03F /* ExpenseSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DBAA802B0D24300033E03F /* ExpenseSection.swift */; };
+		E4DBAA812B0D24300033E03F /* ExpensesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DBAA802B0D24300033E03F /* ExpensesList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		E4DBAA752B078F9C0033E03F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E4DBAA7C2B07931F0033E03F /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E4DBAA7E2B0D21730033E03F /* View-ExpenseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-ExpenseStyle.swift"; sourceTree = "<group>"; };
-		E4DBAA802B0D24300033E03F /* ExpenseSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSection.swift; sourceTree = "<group>"; };
+		E4DBAA802B0D24300033E03F /* ExpensesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +59,7 @@
 			children = (
 				E4DBAA6E2B078F9B0033E03F /* Project7App.swift */,
 				E4DBAA702B078F9B0033E03F /* ContentView.swift */,
-				E4DBAA802B0D24300033E03F /* ExpenseSection.swift */,
+				E4DBAA802B0D24300033E03F /* ExpensesList.swift */,
 				E4DBAA7E2B0D21730033E03F /* View-ExpenseStyle.swift */,
 				E4DBAA7C2B07931F0033E03F /* AddView.swift */,
 				E4DBAA722B078F9C0033E03F /* Assets.xcassets */,
@@ -147,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4DBAA712B078F9B0033E03F /* ContentView.swift in Sources */,
-				E4DBAA812B0D24300033E03F /* ExpenseSection.swift in Sources */,
+				E4DBAA812B0D24300033E03F /* ExpensesList.swift in Sources */,
 				E4DBAA6F2B078F9B0033E03F /* Project7App.swift in Sources */,
 				E4DBAA7D2B07931F0033E03F /* AddView.swift in Sources */,
 				E4DBAA7F2B0D21730033E03F /* View-ExpenseStyle.swift in Sources */,

@@ -14,6 +14,7 @@
 		E400F4E72B625648007443E0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E400F4E62B625648007443E0 /* Result.swift */; };
 		E400F4E92B62584A007443E0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E400F4E82B62584A007443E0 /* Location.swift */; };
 		E400F4EB2B625D5E007443E0 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E400F4EA2B625D5E007443E0 /* EditView.swift */; };
+		E4DC399D2B628092007CC09F /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DC399C2B628092007CC09F /* ContentView-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		E400F4E62B625648007443E0 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		E400F4E82B62584A007443E0 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E400F4EA2B625D5E007443E0 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		E4DC399C2B628092007CC09F /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				E400F4D82B624F55007443E0 /* BucketListApp.swift */,
+				E4DC399C2B628092007CC09F /* ContentView-ViewModel.swift */,
 				E400F4DA2B624F55007443E0 /* ContentView.swift */,
 				E400F4EA2B625D5E007443E0 /* EditView.swift */,
 				E400F4E82B62584A007443E0 /* Location.swift */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E400F4E72B625648007443E0 /* Result.swift in Sources */,
+				E4DC399D2B628092007CC09F /* ContentView-ViewModel.swift in Sources */,
 				E400F4EB2B625D5E007443E0 /* EditView.swift in Sources */,
 				E400F4DB2B624F55007443E0 /* ContentView.swift in Sources */,
 				E400F4E92B62584A007443E0 /* Location.swift in Sources */,
@@ -287,6 +291,7 @@
 				DEVELOPMENT_TEAM = 9HFZ9MY742;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please authenticate yourself to unlock your places";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,6 +321,7 @@
 				DEVELOPMENT_TEAM = 9HFZ9MY742;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please authenticate yourself to unlock your places";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

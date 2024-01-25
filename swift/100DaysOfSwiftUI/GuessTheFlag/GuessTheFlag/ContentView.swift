@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// Challenge Project 3
-// https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
 struct FlagImage: View {
     var country: String
     
@@ -19,203 +17,23 @@ struct FlagImage: View {
             .shadow(radius: 5)
     }
 }
-// End Challenge Project 3
 
 struct ContentView: View {
-    // Using stacks to arrange views
-    // https://www.hackingwithswift.com/books/ios-swiftui/using-stacks-to-arrange-views
-//    var body: some View {
-//        VStack(spacing: 20) {
-//            Text("Hello, world!")
-//            Text("This is another text view")
-//        }
-//        VStack(alignment: .leading) {
-//            Text("Hello, world!")
-//            Text("This is another text view")
-//        }
-//        HStack(spacing: 20) {
-//            Text("Hello, world!")
-//            Text("This is another text view")
-//        }
-//        VStack {
-//            Text("First")
-//            Text("Second")
-//            Text("Third")
-//            Spacer()
-//        }
-//        VStack {
-//            Spacer()
-//            Text("First")
-//            Text("Second")
-//            Text("Third")
-//            Spacer()
-//            Spacer()
-//        }
-//        ZStack {
-//            Text("Hello, world!")
-//            Text("This is inside a stack")
-//        }
-//        VStack {
-//            HStack {
-//                Text("1")
-//                Text("2")
-//                Text("3")
-//            }
-//            HStack {
-//                Text("4")
-//                Text("5")
-//                Text("6")
-//            }
-//            HStack {
-//                Text("7")
-//                Text("8")
-//                Text("9")
-//            }
-//        }
-//    }
-    
-    // Colors and frames
-    // https://www.hackingwithswift.com/books/ios-swiftui/colors-and-frames
-//    var body: some View {
-//        ZStack {
-//            Text("Your content")
-//        }
-//        .background(.red)
-//        ZStack {
-//            Color.red
-//            Text("Your content")
-//        }
-//        ZStack {
-//            Color.red
-//                .frame(width: 200, height: 200)
-//            Text("Your content")
-//        }
-//        ZStack {
-//            Color.red
-//                .frame(minWidth: 200, maxWidth: .infinity, maxHeight: 200)
-//            Text("Your content")
-//        }
-//        ZStack {
-//            Color(red: 1, green: 0.8, blue: 0)
-//            Text("Your content")
-//        }
-//        ZStack {
-//            Color.red
-//            Text("Your content")
-//        }
-//        .ignoresSafeArea()
-//        ZStack {
-//            VStack {
-//                Color.red
-//                Color.blue
-//            }
-//            Text("Your content")
-//                .foregroundColor(.secondary)
-//                .foregroundStyle(.secondary)
-//                .padding(50)
-//                .background(.ultraThinMaterial)
-//        }
-//        .ignoresSafeArea()
-//    }
-    
-    // Gradients
-    // https://www.hackingwithswift.com/books/ios-swiftui/gradients
-//    var body: some View {
-//        LinearGradient(gradient: Gradient(stops: [
-//            Gradient.Stop(color: .white, location: 0.45),
-//            Gradient.Stop(color: .black, location: 0.55),
-//        ]), startPoint: .top, endPoint: .bottom)
-//        LinearGradient(gradient: Gradient(stops: [
-//            .init(color: .white, location: 0.45),
-//            .init(color: .black, location: 0.55),
-//        ]), startPoint: .top, endPoint: .bottom)
-//        RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 20, endRadius: 200)
-//        AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center)
-//    }
-    
-    // Buttons and images
-    // https://www.hackingwithswift.com/books/ios-swiftui/buttons-and-images
-//    var body: some View {
-//        Button("Delete selection") {
-//            print("Now deleting...")
-//        }
-//        Button("Delete selection", action: executeDelete)
-//        Button("Delete selection", role: .destructive, action: executeDelete)
-//        VStack {
-//            Button("Button 1") { }
-//                .buttonStyle(.bordered)
-//            Button("Button 2", role: .destructive) { }
-//                .buttonStyle(.bordered)
-//            Button("Button 3") { }
-//                .buttonStyle(.borderedProminent)
-//                .tint(.mint)
-//            Button("Button 4", role: .destructive) { }
-//                .buttonStyle(.borderedProminent)
-//        }
-//        Button {
-//            print("Button was tapped")
-//        } label: {
-//            Text("Tap me!")
-//                .padding()
-//                .foregroundColor(.white)
-//                .background(.red)
-//        }
-//        Button {
-//            print("Button was tapped!")
-//        } label: {
-//            Image(systemName: "pencil")
-//        }
-//        Button {
-//            print("Button was tapped!")
-//        } label: {
-//            Label("Edit", systemImage: "pencil")
-//        }
-//    }
-//    func executeDelete() {
-//        print("Now deleting...")
-//    }
-    
-    // Showing alert messages
-    // https://www.hackingwithswift.com/books/ios-swiftui/showing-alert-messages
-//    @State private var showingAlert = false
-//
-//    var body: some View {
-//        Button("Show Alert") {
-//            showingAlert = true
-//        }
-//        .alert("Important message", isPresented: $showingAlert) {
-//            Button("OK") { }
-//        }
-//
-//        Button("Show Alert") {
-//            showingAlert = true
-//        }
-//        .alert("Important message", isPresented: $showingAlert) {
-//            Button("Delete", role: .destructive) { }
-//            Button("Cancel", role: .cancel) { }
-//        }
-//        
-//        Button("Show Alert") {
-//            showingAlert = true
-//        }
-//        .alert("Important message", isPresented: $showingAlert) {
-//            Button("OK", role: .cancel) { }
-//        } message: {
-//            Text("Please read this.")
-//        }
-//    }
-    
-    // Stacking up buttons
-    // https://www.hackingwithswift.com/books/ios-swiftui/stacking-up-buttons
-    // Showing the player’s score with an alert
-    // https://www.hackingwithswift.com/books/ios-swiftui/showing-the-players-score-with-an-alert
-    // Styling our flags
-    // https://www.hackingwithswift.com/books/ios-swiftui/styling-our-flags
-    // Upgrading our design
-    // https://www.hackingwithswift.com/books/ios-swiftui/upgrading-our-design
     let maxQuestions = 8
     
-    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    @State private var countries = [
+        "Estonia",
+        "France",
+        "Germany",
+        "Ireland",
+        "Italy",
+        "Nigeria",
+        "Poland",
+        "Russia",
+        "Spain",
+        "UK",
+        "US"
+    ].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     @State private var showingScore = false
     @State private var scoreTitle = ""
@@ -223,13 +41,23 @@ struct ContentView: View {
     @State private var currentQuestion = 0
     @State private var showingLastQuestion = false
     
+    let labels = [
+        "Estonia": "Flag with three horizontal stripes. Top stripe blue, middle stripe black, bottom stripe white.",
+        "France": "Flag with three vertical stripes. Left stripe blue, middle stripe white, right stripe red.",
+        "Germany": "Flag with three horizontal stripes. Top stripe black, middle stripe red, bottom stripe gold.",
+        "Ireland": "Flag with three vertical stripes. Left stripe green, middle stripe white, right stripe orange.",
+        "Italy": "Flag with three vertical stripes. Left stripe green, middle stripe white, right stripe red.",
+        "Nigeria": "Flag with three vertical stripes. Left stripe green, middle stripe white, right stripe green.",
+        "Poland": "Flag with two horizontal stripes. Top stripe white, bottom stripe red.",
+        "Spain": "Flag with three horizontal stripes. Top thin stripe red, middle thick stripe gold with a crest on the left, bottom thin stripe red.",
+        "UK": "Flag with overlapping red and white crosses, both straight and diagonally, on a blue background.",
+        "Ukraine": "Flag with two horizontal stripes. Top stripe blue, bottom stripe yellow.",
+        "US": "Flag with many red and white stripes, with white stars on a blue background in the top-left corner."
+    ]
+    
     var body: some View {
         ZStack {
-//            Color.blue
-//            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
             RadialGradient(stops: [
-//                .init(color: .blue, location: 0.3),
-//                .init(color: .red, location: 0.3),
                 .init(color: Color(red: 0.1, green: 0.2, blue: 0.45), location: 0.3),
                 .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.3),
             ], center: .top, startRadius: 200, endRadius: 700)
@@ -257,7 +85,6 @@ struct ContentView: View {
                             .foregroundColor(.secondary)
                             .font(.subheadline.weight(.heavy))
                         Text(countries[correctAnswer])
-//                            .foregroundColor(.white)
                             .font(.largeTitle.weight(.semibold))
                     }
                     
@@ -265,14 +92,8 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-//                            Image(countries[number])
-//                                .renderingMode(.original)
-//                                .clipShape(Capsule())
-//                                .shadow(radius: 5)
-                            // Challeng`e Project 3
-                            // https://www.hackingwithswift.com/books/ios-swiftui/views-and-modifiers-wrap-up
                             FlagImage(country: countries[number])
-                            // End Challenge Project 3
+                                .accessibilityLabel(labels[countries[number], default: "Unknown flag"])
                         }
                     }
                 }

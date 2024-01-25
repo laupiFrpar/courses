@@ -26,6 +26,7 @@ struct MissionView: View {
                         width * 0.6
                     }
                     .padding(.top)
+                    .accessibilityLabel(mission.badge)
                 
                 if let date = mission.launchDate {
                     Label(date.formatted(date: .complete, time: .omitted), systemImage: "calendar")
